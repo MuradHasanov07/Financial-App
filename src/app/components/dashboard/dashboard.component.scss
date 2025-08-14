@@ -1,0 +1,476 @@
+.dashboard-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.dashboard-header {
+  margin-bottom: 32px;
+  text-align: center;
+
+  h1 {
+    font-size: 32px;
+    font-weight: 300;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+  }
+}
+
+// Stats Grid
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+  }
+
+  &.income-card::before {
+    background: linear-gradient(45deg, #4caf50, #8bc34a);
+  }
+
+  &.expense-card::before {
+    background: linear-gradient(45deg, #f44336, #e91e63);
+  }
+
+  &.balance-card::before {
+    background: linear-gradient(45deg, #2196f3, #21cbf3);
+  }
+
+  &.portfolio-card::before {
+    background: linear-gradient(45deg, #ff9800, #ffc107);
+  }
+
+  mat-card-content {
+    padding: 20px;
+  }
+
+  .stat-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+
+    mat-icon {
+      margin-right: 12px;
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+      color: #666;
+    }
+
+    .stat-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .stat-value {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+
+    &.positive {
+      color: #4caf50;
+    }
+
+    &.negative {
+      color: #f44336;
+    }
+  }
+
+  .stat-subtitle {
+    font-size: 12px;
+    color: #999;
+    display: flex;
+    align-items: center;
+
+    &.positive {
+      color: #4caf50;
+    }
+
+    &.negative {
+      color: #f44336;
+    }
+
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      margin-right: 4px;
+
+      &.positive {
+        color: #4caf50;
+      }
+
+      &.negative {
+        color: #f44336;
+      }
+    }
+  }
+}
+
+// Analytics Section
+.analytics-section {
+  margin-bottom: 32px;
+}
+
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 24px;
+}
+
+.chart-card {
+  mat-card-header {
+    padding-bottom: 16px;
+
+    mat-card-title {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    mat-card-subtitle {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+
+  .chart-container {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fafafa;
+    border-radius: 8px;
+    margin: 16px 0;
+  }
+}
+
+// Activity Section
+.activity-section {
+  margin-bottom: 32px;
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+}
+
+.activity-card {
+  mat-card-header {
+    padding-bottom: 16px;
+  }
+
+  mat-card-content {
+    padding: 0 24px 16px;
+  }
+
+  mat-card-actions {
+    padding: 8px 24px 16px;
+    border-top: 1px solid #eee;
+  }
+}
+
+// Transaction List
+.transaction-list {
+  .transaction-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .transaction-icon {
+      margin-right: 16px;
+
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .transaction-details {
+      flex: 1;
+
+      .transaction-category {
+        font-weight: 500;
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 2px;
+      }
+
+      .transaction-description {
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 2px;
+      }
+
+      .transaction-date {
+        font-size: 11px;
+        color: #999;
+      }
+    }
+
+    .transaction-amount {
+      font-weight: 600;
+      font-size: 14px;
+
+      &.income {
+        color: #4caf50;
+      }
+
+      &.expense {
+        color: #f44336;
+      }
+    }
+  }
+}
+
+// Asset List
+.asset-list {
+  .asset-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .asset-icon {
+      margin-right: 16px;
+
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .asset-details {
+      flex: 1;
+
+      .asset-name {
+        font-weight: 500;
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 2px;
+      }
+
+      .asset-symbol {
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 2px;
+      }
+
+      .asset-quantity {
+        font-size: 11px;
+        color: #999;
+      }
+    }
+
+    .asset-performance {
+      text-align: right;
+
+      .asset-value {
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 4px;
+      }
+
+      .asset-change {
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        &.positive {
+          color: #4caf50;
+        }
+
+        &.negative {
+          color: #f44336;
+        }
+
+        mat-icon {
+          font-size: 14px;
+          width: 14px;
+          height: 14px;
+          margin-right: 2px;
+        }
+      }
+    }
+  }
+}
+
+// Empty State
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+
+  mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: #ccc;
+    margin-bottom: 16px;
+  }
+
+  p {
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+}
+
+// Wealth Summary
+.wealth-summary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+
+  .wealth-content {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+
+    .wealth-icon {
+      margin-right: 24px;
+
+      mat-icon {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+      }
+    }
+
+    .wealth-details {
+      flex: 1;
+
+      h2 {
+        font-size: 24px;
+        font-weight: 300;
+        margin: 0 0 8px 0;
+      }
+
+      p {
+        font-size: 14px;
+        opacity: 0.8;
+        margin: 0;
+      }
+    }
+
+    .wealth-amount {
+      .wealth-value {
+        font-size: 36px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+// Loading State
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+
+  mat-spinner {
+    margin-bottom: 24px;
+  }
+
+  p {
+    color: #666;
+    font-size: 16px;
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 0 8px;
+  }
+
+  .dashboard-header {
+    margin-bottom: 24px;
+
+    h1 {
+      font-size: 24px;
+    }
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .analytics-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .activity-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .chart-container {
+    height: 250px;
+  }
+
+  .wealth-content {
+    flex-direction: column;
+    text-align: center;
+
+    .wealth-icon {
+      margin-right: 0;
+      margin-bottom: 16px;
+    }
+
+    .wealth-details {
+      margin-bottom: 16px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-card .stat-value {
+    font-size: 20px;
+  }
+
+  .wealth-amount .wealth-value {
+    font-size: 28px;
+  }
+}

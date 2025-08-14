@@ -1,0 +1,142 @@
+<div class="settings-container">
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Ayarlar</h1>
+    <p>Bütçe limitlerinizi ve tercihlerinizi yönetin</p>
+  </div>
+
+  <!-- Budget Status Card -->
+  <mat-card class="budget-status-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon [color]="getBudgetColor()">{{ getBudgetIcon() }}</mat-icon>
+        Bu Ayın Bütçe Durumu
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="budget-stats">
+        <div class="budget-stat">
+          <span class="label">Aylık Limit:</span>
+          <span class="value">{{
+            formatCurrency(budgetSettings.monthlyLimit)
+          }}</span>
+        </div>
+        <div class="budget-stat">
+          <span class="label">Bu Ay Harcanan:</span>
+          <span class="value expense">{{
+            formatCurrency(currentMonthExpense)
+          }}</span>
+        </div>
+        <div class="budget-stat">
+          <span class="label">Kalan Bütçe:</span>
+          <span class="value" [class]="isOverBudget ? 'negative' : 'positive'">
+            {{ formatCurrency(remainingBudget) }}
+          </span>
+        </div>
+      </div>
+
+      <div class="budget-progress">
+        <div class="progress-info">
+          <span>Bütçe Kullanımı</span>
+          <span>{{ budgetUsagePercentage.toFixed(1) }}%</span>
+        </div>
+        <mat-progress-bar
+          mode="determinate"
+          [value]="getProgressValue()"
+          [color]="getBudgetColor()"
+        >
+        </mat-progress-bar>
+        <div class="progress-warning" *ngIf="isOverBudget">
+          <mat-icon color="warn">warning</mat-icon>
+          <span>Aylık bütçe limiti aşıldı!</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Budget Settings Form -->
+  <mat-card class="budget-form-card">
+    <mat-card-header>
+      <mat-card-title>Bütçe Ayarları</mat-card-title>
+      <mat-card-subtitle>Aylık harcama limitinizi belirleyin</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form
+        [formGroup]="budgetForm"
+        (ngSubmit)="onBudgetSubmit()"
+        class="budget-form"
+      >
+        <div class="form-row">
+          <mat-slide-toggle formControlName="isEnabled" color="primary">
+            Bütçe limitini etkinleştir
+          </mat-slide-toggle>
+        </div>
+
+        <div class="form-row" *ngIf="budgetForm.get('isEnabled')?.value">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Aylık Harcama Limiti</mat-label>
+            <input
+              matInput
+              type="number"
+              step="100"
+              formControlName="monthlyLimit"
+              placeholder="10000"
+            />
+            <span matSuffix>₺</span>
+            <mat-hint>Aylık maksimum harcama limitinizi belirleyin</mat-hint>
+            <mat-error
+              *ngIf="budgetForm.get('monthlyLimit')?.errors?.['required']"
+            >
+              Aylık limit gereklidir
+            </mat-error>
+            <mat-error *ngIf="budgetForm.get('monthlyLimit')?.errors?.['min']">
+              Minimum limit 100₺ olmalıdır
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="form-actions">
+          <button
+            mat-button
+            type="button"
+            (click)="resetBudgetSettings()"
+            [disabled]="loading"
+          >
+            Sıfırla
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="!budgetForm.valid || loading"
+          >
+            <mat-spinner diameter="20" *ngIf="loading"></mat-spinner>
+            Kaydet
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Budget Info Card -->
+  <mat-card class="info-card">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon color="primary">info</mat-icon>
+        Bütçe Sistemi Hakkında
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ul class="info-list">
+        <li>
+          Aylık harcama limitinizi aştığınızda yeni gider işlemleri
+          engellenecektir
+        </li>
+        <li>Gelir işlemleri bütçe limitinden etkilenmez</li>
+        <li>Limit her ayın 1'inde otomatik olarak sıfırlanır</li>
+        <li>Bütçe durumunuz dashboard'da da görüntülenir</li>
+        <li>Limit %80'ine ulaştığınızda uyarı alırsınız</li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</div>

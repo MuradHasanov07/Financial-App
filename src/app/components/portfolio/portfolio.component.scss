@@ -1,0 +1,719 @@
+.portfolio-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+// Page Header
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h1 {
+    font-size: 28px;
+    font-weight: 300;
+    color: #333;
+    margin: 0;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 12px;
+
+    button {
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+// Statistics Section
+.stats-section {
+  margin-bottom: 24px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+  }
+
+  &.portfolio-value::before {
+    background: linear-gradient(45deg, #ff9800, #ffc107);
+  }
+
+  &.investment::before {
+    background: linear-gradient(45deg, #2196f3, #21cbf3);
+  }
+
+  &.profit-loss::before {
+    background: linear-gradient(45deg, #4caf50, #8bc34a);
+  }
+
+  &.asset-count::before {
+    background: linear-gradient(45deg, #9c27b0, #e91e63);
+  }
+
+  mat-card-content {
+    padding: 20px;
+  }
+
+  .stat-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+
+    mat-icon {
+      margin-right: 8px;
+      color: #666;
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      font-size: 14px;
+      font-weight: 500;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .stat-value {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+
+    &.positive {
+      color: #4caf50;
+    }
+
+    &.negative {
+      color: #f44336;
+    }
+  }
+
+  .stat-subtitle {
+    font-size: 12px;
+    color: #999;
+
+    &.positive {
+      color: #4caf50;
+    }
+
+    &.negative {
+      color: #f44336;
+    }
+  }
+}
+
+// Distribution Section
+.distribution-section {
+  margin-bottom: 24px;
+}
+
+.distribution-card {
+  mat-card-header {
+    padding-bottom: 16px;
+  }
+
+  .distribution-grid {
+    display: grid;
+    gap: 16px;
+
+    .distribution-item {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      background: #f9f9f9;
+      border-radius: 8px;
+
+      .distribution-icon {
+        margin-right: 16px;
+
+        mat-icon {
+          font-size: 32px;
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      .distribution-details {
+        flex: 1;
+        margin-right: 16px;
+
+        .distribution-type {
+          font-weight: 500;
+          font-size: 14px;
+          color: #333;
+          margin-bottom: 4px;
+        }
+
+        .distribution-value {
+          font-size: 16px;
+          font-weight: 600;
+          color: #666;
+        }
+      }
+
+      .distribution-percentage {
+        min-width: 100px;
+        text-align: right;
+
+        span {
+          font-size: 18px;
+          font-weight: 600;
+          color: #333;
+          display: block;
+          margin-bottom: 8px;
+        }
+
+        mat-progress-bar {
+          height: 6px;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}
+
+// Price Update Card
+.price-update-card {
+  margin-bottom: 24px;
+
+  .no-assets-warning {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+
+    mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      color: #ff9800;
+      margin-bottom: 16px;
+    }
+
+    p {
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    button mat-icon {
+      margin-right: 8px;
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .price-form {
+    .form-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-end; // Değiştirildi: end -> flex-end
+
+      mat-form-field {
+        flex: 1;
+      }
+
+      button {
+        height: 48px;
+        margin-bottom: 4px;
+
+        mat-icon {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+
+  // Asset option styling
+  .asset-option {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+
+    .asset-name {
+      font-weight: 500;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .asset-symbol {
+      font-size: 12px;
+      color: #666;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .current-price {
+      font-size: 11px;
+      color: #2196f3;
+      margin-top: 2px;
+    }
+  }
+}
+
+// Form Card
+.form-card {
+  margin-bottom: 24px;
+
+  mat-card-header {
+    padding-bottom: 16px;
+
+    mat-card-title {
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+
+  .asset-form {
+    .form-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+
+      mat-form-field {
+        flex: 1;
+      }
+    }
+
+    .predefined-assets {
+      margin-bottom: 24px;
+
+      label {
+        display: block;
+        margin-bottom: 12px;
+        font-weight: 500;
+        color: #666;
+      }
+
+      .predefined-chips {
+        mat-chip-listbox {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+
+          .predefined-chip {
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+              background-color: #e3f2fd;
+            }
+          }
+        }
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end; // Değiştirildi: end -> flex-end
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid #eee;
+
+      button {
+        min-width: 100px;
+
+        mat-spinner {
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+}
+
+// Filter Card
+.filter-card {
+  margin-bottom: 24px;
+
+  .filter-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end; // Değiştirildi: end -> flex-end
+
+    mat-form-field {
+      min-width: 200px;
+      flex: 1;
+    }
+
+    .clear-filters-btn {
+      height: 48px;
+      margin-bottom: 4px;
+
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+// Table Card
+.table-card {
+  mat-card-header {
+    padding-bottom: 16px;
+
+    mat-card-title {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    mat-card-subtitle {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+
+  .table-container {
+    overflow-x: auto;
+
+    .assets-table {
+      width: 100%;
+
+      .mat-mdc-header-cell {
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .mat-mdc-cell {
+        padding: 12px 8px;
+
+        .asset-info {
+          display: flex;
+          align-items: center;
+
+          mat-icon {
+            margin-right: 12px;
+            font-size: 24px;
+            width: 24px;
+            height: 24px;
+          }
+
+          .asset-details {
+            .asset-name {
+              font-weight: 500;
+              font-size: 14px;
+              color: #333;
+              margin-bottom: 2px;
+            }
+
+            .asset-symbol {
+              font-size: 12px;
+              color: #666;
+              font-weight: 600;
+              text-transform: uppercase;
+            }
+          }
+        }
+
+        .type-chip {
+          font-size: 12px;
+          height: 24px;
+          border-radius: 12px;
+          font-weight: 500;
+        }
+
+        .quantity {
+          font-weight: 500;
+          font-size: 14px;
+          color: #333;
+        }
+
+        .price {
+          font-weight: 500;
+          font-size: 14px;
+          color: #666;
+        }
+
+        .current-value {
+          font-weight: 600;
+          font-size: 14px;
+          color: #333;
+        }
+
+        .profit-loss {
+          .profit-loss-amount {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 2px;
+
+            &.positive {
+              color: #4caf50;
+            }
+
+            &.negative {
+              color: #f44336;
+            }
+          }
+
+          .profit-loss-percentage {
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+
+            &.positive {
+              color: #4caf50;
+            }
+
+            &.negative {
+              color: #f44336;
+            }
+
+            mat-icon {
+              font-size: 14px;
+              width: 14px;
+              height: 14px;
+              margin-right: 2px;
+            }
+          }
+        }
+
+        .action-buttons {
+          display: flex;
+          gap: 4px;
+
+          button {
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+
+            mat-icon {
+              font-size: 16px;
+              width: 16px;
+              height: 16px;
+            }
+          }
+        }
+      }
+
+      .mat-mdc-row {
+        &:hover {
+          background-color: #f9f9f9;
+        }
+
+        &.highlight {
+          background-color: #fff3cd;
+          border-left: 4px solid #ffc107;
+        }
+      }
+    }
+  }
+
+  // No data state
+  .no-data {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+
+    mat-icon {
+      font-size: 64px;
+      width: 64px;
+      height: 64px;
+      color: #ccc;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      font-size: 20px;
+      font-weight: 400;
+      margin: 0 0 8px 0;
+    }
+
+    p {
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    button {
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .portfolio-container {
+    padding: 0 8px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+
+    h1 {
+      font-size: 24px;
+    }
+
+    .header-actions {
+      flex-direction: column;
+      width: 100%;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .distribution-card .distribution-grid .distribution-item {
+    flex-direction: column;
+    text-align: center;
+
+    .distribution-icon {
+      margin-right: 0;
+      margin-bottom: 12px;
+    }
+
+    .distribution-details {
+      margin-right: 0;
+      margin-bottom: 12px;
+    }
+
+    .distribution-percentage {
+      min-width: auto;
+      width: 100%;
+    }
+  }
+
+  .price-update-card .price-form .form-row {
+    flex-direction: column;
+
+    button {
+      margin-bottom: 0;
+    }
+  }
+
+  .form-card .asset-form .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .filter-card .filter-row {
+    flex-direction: column;
+    align-items: stretch;
+
+    mat-form-field {
+      min-width: auto;
+    }
+
+    .clear-filters-btn {
+      margin-bottom: 0;
+    }
+  }
+
+  .table-card {
+    .table-container {
+      .assets-table {
+        .mat-mdc-cell {
+          .asset-info {
+            flex-direction: column;
+            align-items: flex-start;
+
+            mat-icon {
+              margin-right: 0;
+              margin-bottom: 8px;
+            }
+          }
+
+          .action-buttons {
+            flex-direction: column;
+            gap: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid .stat-card .stat-value {
+    font-size: 20px;
+  }
+
+  .distribution-card
+    .distribution-grid
+    .distribution-item
+    .distribution-percentage
+    span {
+    font-size: 16px;
+  }
+
+  .table-card .table-container .assets-table {
+    font-size: 12px;
+
+    .mat-mdc-cell .action-buttons button {
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+
+      mat-icon {
+        font-size: 14px;
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+}
+
+// Custom scrollbar for table
+.table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+
+  &:hover {
+    background: #a8a8a8;
+  }
+}
+
+// Animation for cards
+.stat-card,
+.distribution-card,
+.form-card,
+.filter-card,
+.table-card,
+.price-update-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+}

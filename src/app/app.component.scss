@@ -1,0 +1,137 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 280px;
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.24);
+
+  .sidenav-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+
+    .app-icon {
+      margin-right: 12px;
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+
+    .app-title {
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+
+  mat-nav-list {
+    padding-top: 8px;
+
+    a[mat-list-item] {
+      height: 48px;
+      margin: 4px 8px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+
+      &.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+
+        mat-icon {
+          color: white;
+        }
+      }
+
+      mat-icon {
+        margin-right: 12px;
+        color: #666;
+        transition: color 0.3s ease;
+      }
+
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.main-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .toolbar-title {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  button[mat-icon-button] {
+    margin-left: 8px;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+.main-content {
+  padding: 20px;
+  background-color: #f5f7fa;
+  min-height: calc(100vh - 64px);
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .sidenav {
+    width: 250px;
+  }
+
+  .main-toolbar {
+    .toolbar-title {
+      font-size: 16px;
+    }
+  }
+}
+
+// Global styles for cards and animations
+:host ::ng-deep {
+  .mat-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    }
+  }
+
+  .mat-button,
+  .mat-raised-button,
+  .mat-fab,
+  .mat-mini-fab {
+    border-radius: 8px;
+  }
+
+  .mat-form-field {
+    .mat-form-field-outline {
+      border-radius: 8px;
+    }
+  }
+}

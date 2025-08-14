@@ -1,0 +1,162 @@
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Roboto", "Segoe UI", sans-serif;
+  background-color: #f5f7fa;
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+
+  &:hover {
+    background: #a8a8a8;
+  }
+}
+
+// Material overrides
+.mat-mdc-card {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08) !important;
+  transition: box-shadow 0.3s ease, transform 0.2s ease !important;
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12) !important;
+  }
+}
+
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-fab,
+.mat-mdc-mini-fab {
+  border-radius: 8px !important;
+}
+
+.mat-mdc-form-field {
+  .mat-mdc-form-field-outline {
+    border-radius: 8px !important;
+  }
+}
+
+// Custom snackbar styles
+.success-snackbar {
+  background-color: #4caf50 !important;
+  color: white !important;
+}
+
+.error-snackbar {
+  background-color: #f44336 !important;
+  color: white !important;
+}
+
+.warning-snackbar {
+  background-color: #ff9800 !important;
+  color: white !important;
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+// Utility classes
+.text-positive {
+  color: #4caf50 !important;
+}
+
+.text-negative {
+  color: #f44336 !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.mt-16 {
+  margin-top: 16px !important;
+}
+
+.mb-16 {
+  margin-bottom: 16px !important;
+}
+
+.p-16 {
+  padding: 16px !important;
+}
+
+// Dark theme
+.dark-theme {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+
+  .mat-mdc-card {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+  }
+
+  .mat-toolbar {
+    background-color: #1976d2 !important;
+  }
+
+  .main-content {
+    background-color: #121212 !important;
+  }
+
+  .sidenav {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+  }
+
+  .mat-mdc-form-field {
+    .mat-mdc-text-field-wrapper {
+      background-color: #2d2d2d !important;
+    }
+  }
+
+  .mat-mdc-input-element {
+    color: #ffffff !important;
+  }
+}
+
+// Loading overlay
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}

@@ -1,0 +1,259 @@
+<div class="dashboard-container" *ngIf="!loading">
+  <!-- Header Section -->
+  <div class="dashboard-header">
+    <h1>Finansal Durum</h1>
+    <p>Gelir, gider ve yatırımlarınızın genel görünümü</p>
+  </div>
+
+  <!-- Quick Stats Cards -->
+  <div class="stats-grid">
+    <mat-card class="stat-card income-card">
+      <mat-card-content>
+        <div class="stat-header">
+          <mat-icon>trending_up</mat-icon>
+          <span class="stat-title">Toplam Gelir</span>
+        </div>
+        <div class="stat-value">{{ formatCurrency(balance.totalIncome) }}</div>
+        <div class="stat-subtitle">
+          Bu ay: {{ formatCurrency(thisMonthIncome) }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card expense-card">
+      <mat-card-content>
+        <div class="stat-header">
+          <mat-icon>trending_down</mat-icon>
+          <span class="stat-title">Toplam Gider</span>
+        </div>
+        <div class="stat-value">{{ formatCurrency(balance.totalExpense) }}</div>
+        <div class="stat-subtitle">
+          Bu ay: {{ formatCurrency(thisMonthExpense) }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card balance-card">
+      <mat-card-content>
+        <div class="stat-header">
+          <mat-icon>account_balance</mat-icon>
+          <span class="stat-title">Net Bakiye</span>
+        </div>
+        <div
+          class="stat-value"
+          [class]="balance.netBalance >= 0 ? 'positive' : 'negative'"
+        >
+          {{ formatCurrency(balance.netBalance) }}
+        </div>
+        <div class="stat-subtitle">Gelir - Gider</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card portfolio-card">
+      <mat-card-content>
+        <div class="stat-header">
+          <mat-icon>account_balance_wallet</mat-icon>
+          <span class="stat-title">Portföy Değeri</span>
+        </div>
+        <div class="stat-value">
+          {{ formatCurrency(balance.totalAssetValue) }}
+        </div>
+        <div
+          class="stat-subtitle"
+          [class]="portfolioChange >= 0 ? 'positive' : 'negative'"
+        >
+          <mat-icon [class]="portfolioChange >= 0 ? 'positive' : 'negative'">
+            {{ getChangeIcon(portfolioChange) }}
+          </mat-icon>
+          {{ formatCurrency(portfolioChange) }} ({{
+            portfolioChangePercent.toFixed(2)
+          }}%)
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Charts and Analytics Section -->
+  <div class="analytics-section">
+    <div class="analytics-grid">
+      <!-- Income/Expense Chart -->
+      <mat-card class="chart-card">
+        <mat-card-header>
+          <mat-card-title>Gelir/Gider Trendi</mat-card-title>
+          <mat-card-subtitle>Son 6 ayın özeti</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="chart-container">
+            <canvas id="incomeExpenseChart" width="400" height="200"></canvas>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Portfolio Distribution -->
+      <mat-card class="chart-card">
+        <mat-card-header>
+          <mat-card-title>Portföy Dağılımı</mat-card-title>
+          <mat-card-subtitle>Varlık türlerine göre</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="chart-container">
+            <canvas id="portfolioChart" width="400" height="200"></canvas>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Recent Activity Section -->
+  <div class="activity-section">
+    <div class="activity-grid">
+      <!-- Recent Transactions -->
+      <mat-card class="activity-card">
+        <mat-card-header>
+          <mat-card-title>Son İşlemler</mat-card-title>
+          <mat-card-subtitle>En son 5 işlem</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div
+            class="transaction-list"
+            *ngIf="recentTransactions.length > 0; else noTransactions"
+          >
+            <div
+              class="transaction-item"
+              *ngFor="let transaction of recentTransactions"
+            >
+              <div class="transaction-icon">
+                <mat-icon [color]="getTransactionColor(transaction.type)">
+                  {{ getTransactionIcon(transaction.type) }}
+                </mat-icon>
+              </div>
+              <div class="transaction-details">
+                <div class="transaction-category">
+                  {{ transaction.category }}
+                </div>
+                <div class="transaction-description">
+                  {{ transaction.description }}
+                </div>
+                <div class="transaction-date">
+                  {{ formatDate(transaction.date) }}
+                </div>
+              </div>
+              <div class="transaction-amount" [class]="transaction.type">
+                {{ transaction.type === "income" ? "+" : "-"
+                }}{{ formatCurrency(transaction.amount) }}
+              </div>
+            </div>
+          </div>
+          <ng-template #noTransactions>
+            <div class="empty-state">
+              <mat-icon>receipt</mat-icon>
+              <p>Henüz işlem bulunmuyor</p>
+              <button
+                mat-raised-button
+                color="primary"
+                routerLink="/transactions"
+              >
+                İlk İşlemi Ekle
+              </button>
+            </div>
+          </ng-template>
+        </mat-card-content>
+        <mat-card-actions *ngIf="recentTransactions.length > 0">
+          <button mat-button routerLink="/transactions">Tümünü Gör</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <!-- Top Performing Assets -->
+      <mat-card class="activity-card">
+        <mat-card-header>
+          <mat-card-title>En İyi Performans</mat-card-title>
+          <mat-card-subtitle>Portföydeki en iyi varlıklar</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="asset-list" *ngIf="topAssets.length > 0; else noAssets">
+            <div class="asset-item" *ngFor="let asset of topAssets">
+              <div class="asset-icon">
+                <mat-icon
+                  [style.color]="
+                    asset.type === 'crypto'
+                      ? '#FF9800'
+                      : asset.type === 'stock'
+                      ? '#2196F3'
+                      : '#4CAF50'
+                  "
+                >
+                  {{
+                    asset.type === "crypto"
+                      ? "currency_bitcoin"
+                      : asset.type === "stock"
+                      ? "trending_up"
+                      : "attach_money"
+                  }}
+                </mat-icon>
+              </div>
+              <div class="asset-details">
+                <div class="asset-name">{{ asset.name }}</div>
+                <div class="asset-symbol">{{ asset.symbol }}</div>
+                <div class="asset-quantity">{{ asset.quantity }} adet</div>
+              </div>
+              <div class="asset-performance">
+                <div class="asset-value">
+                  {{ formatCurrency(asset.currentValue || 0) }}
+                </div>
+                <div
+                  class="asset-change"
+                  [class]="
+                    calculateProfitLoss(asset) >= 0 ? 'positive' : 'negative'
+                  "
+                >
+                  <mat-icon>{{
+                    getChangeIcon(calculateProfitLoss(asset))
+                  }}</mat-icon>
+                  {{ calculateProfitLossPercentage(asset).toFixed(2) }}%
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-template #noAssets>
+            <div class="empty-state">
+              <mat-icon>account_balance_wallet</mat-icon>
+              <p>Henüz yatırım bulunmuyor</p>
+              <button mat-raised-button color="primary" routerLink="/portfolio">
+                Portföy Oluştur
+              </button>
+            </div>
+          </ng-template>
+        </mat-card-content>
+        <mat-card-actions *ngIf="topAssets.length > 0">
+          <button mat-button routerLink="/portfolio">Portföyü Gör</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+  <!-- Total Wealth Summary -->
+  <mat-card class="wealth-summary">
+    <mat-card-content>
+      <div class="wealth-content">
+        <div class="wealth-icon">
+          <mat-icon>account_balance</mat-icon>
+        </div>
+        <div class="wealth-details">
+          <h2>Toplam Servet</h2>
+          <p>Nakit bakiye + Portföy değeri</p>
+        </div>
+        <div class="wealth-amount">
+          <span class="wealth-value">{{
+            formatCurrency(balance.totalWealth)
+          }}</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Loading State -->
+<div class="loading-container" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+  <p>Veriler yükleniyor...</p>
+</div>
