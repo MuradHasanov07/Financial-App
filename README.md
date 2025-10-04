@@ -25,7 +25,7 @@ Projeyi yerel makinenizde çalıştırmak için:
 
 Projeyi klonlayın:
 
-git clone https://github.com/kullanici-adi/finans-takip.git
+[git clone https://github.com/kullanici-adi/finans-takip.git](https://github.com/MuradHasanov07/Financial-App.git)
 cd finans-takip
 
 
