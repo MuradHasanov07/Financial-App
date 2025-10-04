@@ -1,27 +1,87 @@
-# TakipUygulamasi
+💰 Kişisel Finans ve Yatırım Takip Uygulaması
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
+Bu proje, kullanıcıların gelir–gider takibini yapabileceği, yatırım performanslarını izleyebileceği ve bütçelerini analiz edebileceği bir web tabanlı finans yönetim sistemidir.
+Modern arayüzü ve görselleştirme desteği ile kullanıcı dostu bir deneyim sunar.
 
-## Development server
+✨ Özellikler
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+💵 Gelir ve gider kayıtları oluşturma
 
-## Code scaffolding
+📈 Yatırım performansı ve portföy takibi
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+📊 Grafik tabanlı finansal analiz (Chart.js)
 
-## Build
+🧾 Kategorilere göre filtreleme
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+📅 Tarih bazlı arama ve sıralama
 
-## Running unit tests
+💾 LocalStorage ile veri kalıcılığı
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+📱 Mobil uyumlu tasarım
 
-## Running end-to-end tests
+🚀 Kurulum
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Projeyi yerel makinenizde çalıştırmak için:
 
-## Further help
+Projeyi klonlayın:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+git clone https://github.com/kullanici-adi/finans-takip.git
+cd finans-takip
+
+
+Bağımlılıkları yükleyin:
+
+npm install
+
+
+Uygulamayı başlatın:
+
+npm start
+
+
+Tarayıcıda açın:
+
+http://localhost:3000
+
+🛠️ Kullanılan Teknolojiler
+
+React.js
+
+JavaScript (ES6+)
+
+HTML5 & CSS3
+
+Chart.js
+
+LocalStorage API
+
+📱 Kullanım
+💰 Gelir / Gider Ekleme
+
+“Yeni Kayıt” formunu doldurun
+
+Kategoriyi (gelir/gider) ve tutarı seçin
+
+“Kaydet” butonuna tıklayın
+
+📈 Yatırım Takibi
+
+Günlük veya aylık yatırım değişimlerini takip edin
+
+Grafik sekmesinde portföy trendlerini görüntüleyin
+
+📊 Analiz Sayfası
+
+Harcamalar kategorilere göre renkli grafiklerle gösterilir
+
+Toplam gelir, gider ve net bakiye hesaplanır
+
+🎨 Tasarım Özellikleri
+
+Minimalist ve sezgisel kullanıcı arayüzü
+
+Responsive (mobil uyumlu) tasarım
+
+Tematik renk geçişleri
+
+Karanlık mod desteği (opsiyonel)
